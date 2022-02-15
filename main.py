@@ -93,7 +93,7 @@ t = {}
 
 # Starting with the Main App.
 
-st.title('Swatch Youtube Mission.')
+st.title('Youtube Comment Analyzer.')
 
 # Create a page dropdown 
 # page = st.sidebar.selectbox("Choose your page", ["View Video."]) 
@@ -188,7 +188,10 @@ if url != "":
 
 	for i in range(5):
 		name = youtube.df.iloc[i]
-		st.dataframe(name[["Author Name", "Comment"]])
+		author_name = name["Author Name"]
+		comment_body = name["Comment"]
+		st.subheader(author_name)
+		st.text(comment_body)
 
 	# st.dataframe(youtube.df[["Author Name", "Comment"]])
 	
