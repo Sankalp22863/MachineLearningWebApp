@@ -186,11 +186,11 @@ if url != "":
 
 	youtube.df = youtube.df.drop("Comment_id", axis = 1)
 
-	# for i in range(10):
-	# 	name = df.iloc[i]
-	# 	st.dataframe(youtube.df[["Author Name", "Comment"]])
+	for i in range(5):
+		name = youtube.df.iloc[i]
+		st.dataframe(youtube.df[["Author Name", "Comment"]])
 
-	st.dataframe(youtube.df[["Author Name", "Comment"]])
+	# st.dataframe(youtube.df[["Author Name", "Comment"]])
 	
 else:
 	st.markdown("Please Enter a Video URL to scrap the comments from.")
