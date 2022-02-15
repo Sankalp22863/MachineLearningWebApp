@@ -190,9 +190,9 @@ if url != "":
 		name = youtube.df.iloc[i]
 		author_name = name["Author Name"]
 		comment_body = name["Comment"]
-		c1, c2 = columns(2)
-		c1.subheader(author_name)
-		c2.text(comment_body)
+# 		c1, c2 = columns(2)
+		st.subheader(author_name)
+		st.text(comment_body)
 
 	# st.dataframe(youtube.df[["Author Name", "Comment"]])
 	
