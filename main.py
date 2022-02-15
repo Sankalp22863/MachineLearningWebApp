@@ -188,7 +188,7 @@ if url != "":
 
 	for i in range(5):
 		name = youtube.df.iloc[i]
-		st.dataframe(youtube.df[["Author Name", "Comment"]])
+		st.dataframe(name[["Author Name", "Comment"]])
 
 	# st.dataframe(youtube.df[["Author Name", "Comment"]])
 	
