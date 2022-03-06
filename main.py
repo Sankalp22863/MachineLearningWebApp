@@ -72,7 +72,7 @@ welcome_txt = '''Years for now the comment section of Youtube has been plagued w
 
 st.markdown(welcome_txt)
 
-_, col, _ = st.columns(3)
+_, _,  col, _, _ = st.columns(5)
 
 col.title(' 🙏  ')
 
