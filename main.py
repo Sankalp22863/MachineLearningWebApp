@@ -65,6 +65,11 @@ def change_vid_disp():
     st.text("Selected Video is ")
     selected_video
     st.session_state.selected_video = selected_video
+    return
+
+def rerun():
+    rerun = True
+    return
 
 
 
@@ -121,6 +126,9 @@ with st.expander("What is Youtube universe of Comments??", expanded=True):
 method = st.radio("Choose which way you want to get the video :", [
                   "Search the video online.", "Paste the URL of the video."])
 
+if "rerun" not in st.session_state:
+    st.session_state.rerun = False
+
 if method == "Paste the URL of the video.":
     url = st.text_input(
         "Please enter the url of the video you want to check the comments of.")
@@ -138,6 +146,7 @@ else:
 
     if vid_search != '':
         for i in range(10):
+            videosSearch.result()['result'][i]['title'] == Vids
             Vids.append(videosSearch.result()['result'][i]['title'])
             urls.append(videosSearch.result()['result'][i]['link'])
 
