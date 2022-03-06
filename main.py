@@ -92,23 +92,26 @@ else:
         "Choose the name of the video you want to search.")
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
-    if vid_search != '':
-        for i in range(10):
-            Vids.append(videosSearch.result()['result'][i]['title'])
-            url.append(videosSearch.result()['result'][i]['link'])
 
-        for i in range(10):
-            t[Vids[i]] = url[i]
+    videosSearch.result()['result'][0]
 
-        selected_video = st.selectbox('Select the Video', Vids)
+    # if vid_search != '':
+    #     for i in range(10):
+    #         Vids.append(videosSearch.result()['result'][i]['title'])
+    #         url.append(videosSearch.result()['result'][i]['link'])
 
-        prev = selected_video
+    #     for i in range(10):
+    #         t[Vids[i]] = url[i]
 
-        url = t[selected_video]
-        st.subheader(selected_video)
+    #     selected_video = st.selectbox('Select the Video', Vids)
 
-        # Embed a youtube video
-        st_player(url)
+    #     prev = selected_video
+
+    #     url = t[selected_video]
+    #     st.subheader(selected_video)
+
+    #     # Embed a youtube video
+    #     st_player(url)
 
 if url != "":
     youtube = YoutubeAPI.YoutubeAPI(url)
