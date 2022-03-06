@@ -117,6 +117,7 @@ if url != "" and url != []:
 	st_player(url)
 
     youtube = YoutubeAPI.YoutubeAPI(url)
+	
     # parse video ID from URL.
     youtube.video_id = youtube.get_video_id_by_url(url)
     # make API call to get video info.
