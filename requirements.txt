@@ -11,4 +11,5 @@ google-api-python-client==2.26.1
 tensorflow==2.6.0
 keras==2.6.0
 sklearn
+nltk
 textblob==0.17.1
