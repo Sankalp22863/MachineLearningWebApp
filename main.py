@@ -60,8 +60,9 @@ def vid():
 
     return
 
-def change_vid_disp():
-    st.session_state.selected_video
+def change_vid_disp(selected_video):
+    selected_video
+    st.session_state.selected_video = selected_video
     return
 
 def rerun():
@@ -157,14 +158,16 @@ def main():
             if "selected_video" not in st.session_state:
                 st.session_state.selected_video = Vids[0]
 
-            st.session_state.selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp)
+            selected_video = Vids[0]
+
+            selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp, args = selected_video)
 
             # prev = selected_video
 
             # st.session_state.selected_video
 
-            url = t[st.session_state.selected_video]
-            st.subheader(st.session_state.selected_video)
+            url = t[selected_video]
+            st.subheader(selected_video)
 
 
     if url != "":
