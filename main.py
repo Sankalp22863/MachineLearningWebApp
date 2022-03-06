@@ -61,6 +61,7 @@ def vid():
     return
 
 def change_vid_disp():
+    st.session_state.selected_video
     return
 
 def rerun():
