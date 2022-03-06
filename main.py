@@ -158,14 +158,14 @@ def main():
             if "selected_video" not in st.session_state:
                 st.session_state.selected_video = Vids[0]
 
-            selected_video = st.selectbox('Select the Video', Vids)
+            st.session_state.selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp)
 
             # prev = selected_video
 
             # st.session_state.selected_video
 
-            url = t[selected_video]
-            st.subheader(selected_video)
+            url = t[st.session_state.selected_video]
+            st.subheader(st.session_state.selected_video)
 
 
     if url != "":
