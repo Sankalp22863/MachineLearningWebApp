@@ -160,7 +160,7 @@ def main():
 
             selected_video = Vids[0]
 
-            selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp, args = selected_video)
+            selected_video = st.selectbox('Select the Video', Vids)
 
             # prev = selected_video
 
