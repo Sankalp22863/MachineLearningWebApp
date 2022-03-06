@@ -100,11 +100,13 @@ st.title('Youtube Comment Analyzer.')
 # videosSearch = VideosSearch(vid_search, limit = 10)
 
 method = st.radio("Choose which way you want to get the video :", [
-                  "Search the video online.", "Paste the URL of the video."])
+                  "Paste the URL of the video.", "Search the video online."])
 
 if method == "Paste the URL of the video.":
     url = st.text_input(
         "Please enter the url of the video you want to check the comments of.")
+else:
+    url = ""
 
 
 if url != "":
