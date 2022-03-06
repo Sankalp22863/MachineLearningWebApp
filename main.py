@@ -74,7 +74,7 @@ st.markdown(welcome_txt)
 
 _, _,  col, _, _ = st.columns(5)
 
-col.title(' 🙏  ')
+col.title('🙏 ')
 
 st.title('Welcome to Youtube Universe of Comments.')
 
