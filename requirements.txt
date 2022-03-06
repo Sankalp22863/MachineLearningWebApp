@@ -2,14 +2,12 @@ altair
 pandas==1.2.4
 streamlit==1.0.0
 datetime
-yfinance==0.1.63
 plotly==5.3.1
 pandas-datareader==0.10.0
 pystan==2.19.1.1
 streamlit-player==0.1.5
 youtube-search-python==1.4.9
 google-api-python-client==2.26.1
-speedtest-cli
 tensorflow==2.6.0
 keras==2.6.0
 sklearn
