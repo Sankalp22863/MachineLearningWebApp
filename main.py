@@ -46,8 +46,6 @@ import time
 
 import YoutubeAPI
 
-vid_search = ""
-
 
 def vid():
     global url
@@ -55,6 +53,26 @@ def vid():
     global Vids
     global vid_search
     global displayed
+
+    if vid_search != '':
+        for i in range(10):
+            Vids.append(videosSearch.result()['result'][i]['title'])
+            url.append(videosSearch.result()['result'][i]['link'])
+
+        for i in range(10):
+            t[Vids[i]] = url[i]
+
+        selected_video = st.selectbox('Select the Video', Vids)
+
+        prev = selected_video
+
+        url = t[selected_video]
+        st.subheader(selected_video)
+
+        # Embed a youtube video
+        st_player(url)
+
+        displayed = True
 
     return
 
@@ -88,34 +106,13 @@ if method == "Paste the URL of the video.":
     url = st.text_input(
         "Please enter the url of the video you want to check the comments of.")
 else:
-    vid_search = st.text_input(
+    vid_name = st.text_input(
         "Choose the name of the video you want to search.")
     url = ""
+    # seach_vids = YoutubeApI.Search.list(vid_name)
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    Vids = []
-    url = []
-
-    if vid_search != '':
-        for i in range(10):
-            Vids.append(videosSearch.result()['result'][i]['title'])
-            url.append(videosSearch.result()['result'][i]['link'])
-
-        for i in range(10):
-            t[Vids[i]] = url[i]
-
-        selected_video = st.selectbox('Select the Video', Vids)
-
-        prev = selected_video
-
-        url = t[selected_video]
-        st.subheader(selected_video)
-
-if url != "" and url != []:
-
-	# Embed a youtube video
-	st_player(url)
-
+if url != "":
     youtube = YoutubeAPI.YoutubeAPI(url)
     # parse video ID from URL.
     youtube.video_id = youtube.get_video_id_by_url(url)
@@ -191,8 +188,6 @@ if url != "" and url != []:
     disp_msg.text("")
 
     youtube.df = youtube.df.drop("Comment_id", axis=1)
-
-	st.header("Top 5 Comments.")
 
     for i in range(5):
         name = youtube.df.iloc[i]
