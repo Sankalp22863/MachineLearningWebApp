@@ -229,6 +229,7 @@ if url != "":
         author_name = name["Author Name"]
         comment_body = name["Comment"]
 # 		c1, c2 = columns(2)
+        st.text("This text is **bold**.")
         with st.expander("**" + author_name + "**" + " Says : "):
             st.markdown(comment_body)
 
