@@ -93,6 +93,7 @@ else:
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
 
+<<<<<<< HEAD
     if vid_search != '':
 
         for i in range(10):
@@ -108,6 +109,28 @@ else:
 
     #     url = t[selected_video]
     #     st.subheader(selected_video)
+=======
+    videosSearch.result()['result'][0]['title']
+    videosSearch.result()['result'][0]['link']
+
+    # if vid_search != '':
+    #     for i in range(10):
+    #         Vids.append(videosSearch.result()['result'][i]['title'])
+    #         url.append(videosSearch.result()['result'][i]['link'])
+
+    #     for i in range(10):
+    #         t[Vids[i]] = url[i]
+
+    #     selected_video = st.selectbox('Select the Video', Vids)
+
+    #     prev = selected_video
+
+    #     url = t[selected_video]
+    #     st.subheader(selected_video)
+
+    #     # Embed a youtube video
+    #     st_player(url)
+>>>>>>> parent of 9839868... Added the video search option
 
 if url != "":
 
