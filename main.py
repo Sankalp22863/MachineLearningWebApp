@@ -94,7 +94,6 @@ else:
     videosSearch = VideosSearch(vid_search, limit=10)
 
     if vid_search != '':
-
 		Vids = []
     	url = []	
 
