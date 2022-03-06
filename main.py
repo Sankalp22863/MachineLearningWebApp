@@ -111,10 +111,11 @@ else:
         url = t[selected_video]
         st.subheader(selected_video)
 
-        # Embed a youtube video
-        st_player(url)
+if url != "" and url != []:
 
-if url != "":
+	# Embed a youtube video
+	st_player(url)
+
     youtube = YoutubeAPI.YoutubeAPI(url)
     # parse video ID from URL.
     youtube.video_id = youtube.get_video_id_by_url(url)
@@ -190,6 +191,8 @@ if url != "":
     disp_msg.text("")
 
     youtube.df = youtube.df.drop("Comment_id", axis=1)
+
+	st.header("Top 5 Comments.")
 
     for i in range(5):
         name = youtube.df.iloc[i]
