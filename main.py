@@ -61,6 +61,7 @@ def vid():
     return
 
 def change_vid_disp():
+    st.text(st.session_state.selected_video)
     return
 
 def rerun():
@@ -110,8 +111,10 @@ def main():
     col.title('**_to_**')
     st.title('🌎**_Youtube Universe of Comments_**🌏.')
 
+    st.sidebar.title('🌎**_Youtube Universe of Comments_**🌏.')
 
-    with st.expander("What is Youtube universe of Comments??", expanded=True):
+
+    with st.sidebar.expander("What is Youtube universe of Comments??", expanded=True):
         st.markdown(welcome_txt)
 
 
