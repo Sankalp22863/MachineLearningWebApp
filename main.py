@@ -130,7 +130,6 @@ else:
     # seach_vids = YoutubeApI.Search.list(vid_name)
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    vid_search
     # Searching the Video using the URL.
 
     vids = []
@@ -149,10 +148,10 @@ else:
 
         selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp)
 
-        prev = selected_video
+        # prev = selected_video
 
-        url = t[selected_video]
-        st.subheader(selected_video)
+        url = t[st.session_state.selected_video]
+        st.subheader(st.session_state.selected_video)
 
 
 if url != "":
