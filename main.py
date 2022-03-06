@@ -262,6 +262,9 @@ if url != "":
 
         df["Gravity"] = df["Subjectivity"]/(2 + df["Polarity"])**2
 
+        st.dataframe(df.sort_values(by=['Gravity'], ascending=False).head(10)[
+            ["Comment", "Gravity"]])
+
         # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
 
     else:
