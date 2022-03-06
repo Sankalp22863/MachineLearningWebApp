@@ -94,6 +94,7 @@ else:
     videosSearch = VideosSearch(vid_search, limit=10)
 
     if vid_search != '':
+
 		Vids = []
     	url = []	
 
@@ -101,15 +102,15 @@ else:
             Vids.append(videosSearch.result()['result'][i]['title'])
             url.append(videosSearch.result()['result'][i]['link'])
 
-        for i in range(10):
-            t[Vids[i]] = url[i]
+    #     for i in range(10):
+    #         t[Vids[i]] = url[i]
 
-        selected_video = st.selectbox('Select the Video', Vids)
+    #     selected_video = st.selectbox('Select the Video', Vids)
 
-        prev = selected_video
+    #     prev = selected_video
 
-        url = t[selected_video]
-        st.subheader(selected_video)
+    #     url = t[selected_video]
+    #     st.subheader(selected_video)
 
 if url != "":
 
