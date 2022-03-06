@@ -80,7 +80,7 @@ _, col, _ = st.columns(3)
 
 col.title('Welcome')
 
-_, col, _ = st.columns(3)
+_, _,  col, _, _ = st.columns(5)
 
 col.title('to')
 st.title('Welcome to Youtube Universe of Comments.')
