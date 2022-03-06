@@ -62,6 +62,8 @@ def vid():
 
 def change_vid_disp():
     global selected_video
+    st.text("Selected Video is ")
+    selected_video
     st.session_state.selected_video = selected_video
 
 
@@ -149,7 +151,7 @@ else:
 
         # prev = selected_video
 
-        st.session_state.selected_video
+        # st.session_state.selected_video
 
         url = t[selected_video]
         st.subheader(selected_video)
