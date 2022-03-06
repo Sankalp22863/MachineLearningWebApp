@@ -124,7 +124,7 @@ else:
     # seach_vids = YoutubeApI.Search.list(vid_name)
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    videosSearch
+    vid_search
     # Searching the Video using the URL.
 
     vids = []
