@@ -69,7 +69,7 @@ t = {}
 
 welcome_txt = '''Years for now the comment section of Youtube has been plagued with random spam content and the youtube doesn't seem to doing anything about it. We here introduce a new comment section revamped to make the good comments float to the top and the spam ones to linger to the bottom.'''
 
-_, _,  col, _, _ = st.columns(5)
+_, _, _,  col, _, _, _ = st.columns(7)
 
 col.title('🙏 ')
 
