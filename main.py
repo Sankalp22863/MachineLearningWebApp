@@ -93,7 +93,7 @@ else:
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
 
-	Vids = []
+	vids = []
 	url = []
 
     if vid_search != '':
