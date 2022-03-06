@@ -93,7 +93,8 @@ else:
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    videosSearch.result()['result'][0]
+    videosSearch.result()['result'][0]['title']
+    videosSearch.result()['result'][0]['link']
 
     # if vid_search != '':
     #     for i in range(10):
