@@ -224,14 +224,12 @@ if url != "":
 
     st.header("The Top 5 Comments of the Video are :")
 
-    st.text(color.BOLD + 'Hello World !' + color.END)
-
     for i in range(5):
         name = youtube.df.iloc[i]
         author_name = name["Author Name"]
         comment_body = name["Comment"]
 # 		c1, c2 = columns(2)
-        with st.expander(author_name + " Says : "):
+        with st.expander("**" + author_name + "**" + " Says : "):
             st.markdown(comment_body)
 
     # st.dataframe(youtube.df[["Author Name", "Comment"]])
