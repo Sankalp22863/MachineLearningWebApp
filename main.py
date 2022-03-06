@@ -93,10 +93,11 @@ else:
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    Vids = []
-    url = []
-
     if vid_search != '':
+
+		Vids = []
+    	url = []	
+
         for i in range(10):
             Vids.append(videosSearch.result()['result'][i]['title'])
             url.append(videosSearch.result()['result'][i]['link'])
@@ -111,13 +112,12 @@ else:
         url = t[selected_video]
         st.subheader(selected_video)
 
-if url != "" and url != []:
+if url != "":
 
 	# Embed a youtube video
 	st_player(url)
 
     youtube = YoutubeAPI.YoutubeAPI(url)
-	
     # parse video ID from URL.
     youtube.video_id = youtube.get_video_id_by_url(url)
     # make API call to get video info.
@@ -193,7 +193,7 @@ if url != "" and url != []:
 
     youtube.df = youtube.df.drop("Comment_id", axis=1)
 
-	st.header("Top 5 Comments.")
+	st.header("Top 5 comments : ")
 
     for i in range(5):
         name = youtube.df.iloc[i]
