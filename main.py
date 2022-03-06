@@ -65,19 +65,22 @@ t = {}
 
 # Starting with the Main App.
 
-st.title('Youtube Comment Analyzer.')
+st.title('Youtube Universe of Comments.')
+
+welcome_txt = "Years for now the comment section of Youtube has been plagued with \
+                Random spam content and the youtube doesn't seem to doing anything about \
+                   it. We here introduce a new comment section revamped to make the good comments \
+                       float to the top and the spam ones to linger to the bottom."
+
+st.title('Welcome to Youtube Universe of Comments.')
+
+st.text(welcome_txt)
 
 # Create a page dropdown
 # page = st.sidebar.selectbox("Choose your page", ["View Video."])
 
 # st.sidebar.markdown("Clean up the Youtube Section.")
 # st.sidebar.markdown(" ")
-
-# Displaying the df.
-
-# vid_search = st.text_input("Search a Youtube Video")
-# vid_search = st.text_input("Copy and paste the link of the URL of the youtube Video.")
-# videosSearch = VideosSearch(vid_search, limit = 10)
 
 method = st.radio("Choose which way you want to get the video :", [
                   "Paste the URL of the video.", "Search the video online."])
