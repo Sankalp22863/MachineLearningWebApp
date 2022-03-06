@@ -67,10 +67,10 @@ t = {}
 
 st.title('Youtube Universe of Comments.')
 
-welcome_txt = "Years for now the comment section of Youtube has been plagued with \
-                Random spam content and the youtube doesn't seem to doing anything about \
-                   it. We here introduce a new comment section revamped to make the good comments \
-                       float to the top and the spam ones to linger to the bottom."
+welcome_txt = '''Years for now the comment section of Youtube has been plagued with 
+                random spam content and the youtube doesn't seem to doing anything about 
+                   it. We here introduce a new comment section revamped to make the good comments 
+                       float to the top and the spam ones to linger to the bottom.'''
 
 st.title('Welcome to Youtube Universe of Comments.')
 
