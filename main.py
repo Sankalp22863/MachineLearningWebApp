@@ -83,7 +83,7 @@ col.title('Welcome')
 _, _,  col, _, _ = st.columns(5)
 
 col.title('to')
-st.title('Welcome to Youtube Universe of Comments.')
+st.title('Youtube Universe of Comments.')
 
 # Create a page dropdown
 # page = st.sidebar.selectbox("Choose your page", ["View Video."])
