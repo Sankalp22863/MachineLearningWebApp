@@ -61,7 +61,6 @@ def vid():
     return
 
 def change_vid_disp():
-    
     return
 
 def rerun():
@@ -125,7 +124,7 @@ def main():
     # st.sidebar.markdown(" ")
 
 
-    method = st.radio("Choose which way you want to get the video :", [
+    method = st.sidebar.radio("Choose which way you want to get the video :", [
                       "Search the video online.", "Paste the URL of the video."])
 
     if "rerun" not in st.session_state:
