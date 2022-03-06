@@ -150,6 +150,8 @@ else:
 
         # prev = selected_video
 
+        st.session_state.selected_video
+
         url = t[st.session_state.selected_video]
         st.subheader(st.session_state.selected_video)
 
