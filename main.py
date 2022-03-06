@@ -61,10 +61,6 @@ def vid():
     return
 
 def change_vid_disp():
-    global selected_video
-    st.text("Selected Video is ")
-    selected_video
-    st.session_state.selected_video = selected_video
     return
 
 def rerun():
