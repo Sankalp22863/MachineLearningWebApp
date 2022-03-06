@@ -16,6 +16,10 @@ import matplotlib.pyplot as plt
 
 import VideoPlaylist
 
+from textblob import TextBlob
+
+import Sentimental_Analysis
+
 # try:
 #     from streamlit.ReportThread import add_report_ctx
 #     from streamlit.server.Server import Server
@@ -93,10 +97,10 @@ col.title('**_Welcome_**')
 _, _, _,  col, _, _, _ = st.columns(7)
 
 col.title('**_to_**')
-st.title('**_Youtube Universe of Comments._**')
+st.title('🌎**_Youtube Universe of Comments_**🌏.')
 
 
-with st.expander("What is Youtbe universe of Comments??", expanded=True):
+with st.expander("What is Youtube universe of Comments??", expanded=True):
     st.markdown(welcome_txt)
 
 
@@ -156,18 +160,6 @@ if url != "":
     disp_msg = st.subheader("Extracting the Information about the videos.")
     youtube.get_video_infos(youtube.response)
 
-    # Displaying the Video information.
-    # print(f"""\
-    # Title: {title}
-    # Description: {description}
-    # Channel Title: {channel_title}
-    # Publish time: {publish_time}
-    # Duration: {duration_str}
-    # Number of comments: {comment_count}
-    # Number of likes: {like_count}
-    # Number of views: {view_count}
-    # """)
-
     thumbnail_url = "http://img.youtube.com/vi/" + \
         youtube.video_id + "/hqdefault.jpg"
 
@@ -179,7 +171,10 @@ if url != "":
     channel = "Channel : " + str(youtube.channel_title)
     likes = "Likes : " + youtube.like_count
     views = "Views : " + youtube.view_count
-    comments = "Comments : " + youtube.comment_count
+    if youtube.comment_count is not None:
+        comments = "Comments : " + str(youtube.comment_count)
+    else:
+        comments = "Comments : (N/A) Disabled "
 
     day, p_time = youtube.publish_time.split("T")
     pub_time = "Video was Published on " + day + " at " + p_time[:-1]
@@ -216,23 +211,61 @@ if url != "":
 
     disp_msg.subheader(
         "Information Extracted Sucessfully. Now onto scrapping the Comments.")
-    youtube.scrap_comments(url)
-    # disp_msg.subheader("The Comments from the video extracted Sucessfully.")
-    disp_msg.text("")
 
-    youtube.df = youtube.df.drop("Comment_id", axis=1)
+    if youtube.comment_count is not None:
+        youtube.scrap_comments(url)
+        # disp_msg.subheader("The Comments from the video extracted Sucessfully.")
+        disp_msg.text("")
 
-    st.header("The Top 5 Comments of the Video are :")
+        youtube.df = youtube.df.drop("Comment_id", axis=1)
 
-    for i in range(5):
-        name = youtube.df.iloc[i]
-        author_name = name["Author Name"]
-        comment_body = name["Comment"]
-# 		c1, c2 = columns(2)
-        with st.expander(author_name + " Says : "):
-            st.markdown(comment_body)
+        st.header("The Top 5 Comments of the Video are :")
 
-    # st.dataframe(youtube.df[["Author Name", "Comment"]])
+        # comments = [for i in range(5) st.expander()]
+
+        for i in range(5):
+            name = youtube.df.iloc[i]
+            author_name = name["Author Name"]
+            comment_body = name["Comment"]
+
+            with st.expander(author_name + " Says : "):
+                st.markdown(comment_body)
+                # blob = TextBlob(comment_body)
+                # lang = blob.detect_language()
+                # st.markdown("lang : ", lang)
+
+        # st.dataframe(youtube.df[["Author Name", "Comment"]])
+
+        text_msg = st.subheader("Analysing the comments.")
+
+        senti_analysis = Sentimental_Analysis.Senti_Analysis()
+
+        text_msg.subheader("Analysis Complete.")
+
+        df = senti_analysis.SentimientAnalysis(youtube.df)
+
+        col1, col2 = st.columns(2)
+
+        col1.text("Top 10 positive Comments : ")
+
+        col2.text("Top 10 Negative Comments : ")
+
+        col1, col2 = st.columns(2)
+
+        col1.dataframe(df.sort_values(by=['Polarity'], ascending=False).head(10)[
+            ["Comment", "Polarity", "Subjectivity"]])
+
+        col2.dataframe(df.sort_values(by=['Polarity']).head(10)[
+            ["Comment", "Polarity", "Subjectivity"]])
+
+        # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
+
+    else:
+        # Then the comments for the video have been disabled.
+        st.header(
+            "The Comments for this Video have been disabed So unable to proceed.")
+        st.header("So, please choose a different video.")
+
 
 else:
     st.markdown("Please Enter a Video URL to scrap the comments from.")

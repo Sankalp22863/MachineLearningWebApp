@@ -14,3 +14,4 @@ speedtest-cli
 tensorflow==2.6.0
 keras==2.6.0
 sklearn
+textblob==0.17.1

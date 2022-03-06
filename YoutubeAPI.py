@@ -59,10 +59,7 @@ class YoutubeAPI:
         self.description = self.snippet["description"]
         self.publish_time = self.snippet["publishedAt"]
         # get stats infos
-        try:
-            self.comment_count = self.statistics["commentCount"]
-        except KeyError:
-            self.comment_count = 0
+        self.comment_count = self.statistics.get("commentCount")
         try:
             self.like_count = self.statistics["likeCount"]
         except KeyError:
@@ -80,16 +77,7 @@ class YoutubeAPI:
             if d:
                 self.duration_str += f"{d[:-1]}:"
         self.duration_str = self.duration_str.strip(":")
-        # print(f"""\
-        # Title: {title}
-        # Description: {description}
-        # Channel Title: {channel_title}
-        # Publish time: {publish_time}
-        # Duration: {duration_str}
-        # Number of comments: {comment_count}
-        # Number of likes: {like_count}
-        # Number of views: {view_count}
-        # """)
+
         return
 
     def get_comments(self, youtube, **kwargs):
