@@ -62,7 +62,9 @@ def vid():
 
 def change_vid_disp():
     global selected_video
-    st.session_state.selected_video_id = VideosSearch
+    st.text("Selected Video is ")
+    selected_video
+    st.session_state.selected_video = selected_video
     return
 
 def rerun():
@@ -142,11 +144,6 @@ else:
     vids = []
     urls = []
 
-    if "selected_video_id" not in st.session_state:
-        st.session_state.selected_video_id = VideosSearch
-
-    VideosSearch == st.session_state.selected_video_id
-
     if vid_search != '':
         for i in range(10):
             Vids.append(videosSearch.result()['result'][i]['title'])
@@ -155,7 +152,8 @@ else:
         for i in range(10):
             t[Vids[i]] = urls[i]
 
-
+        if "selected_video" not in st.session_state:
+            st.session_state.selected_video = Vids[0]
 
         selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp)
 
