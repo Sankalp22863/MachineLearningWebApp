@@ -93,8 +93,9 @@ with st.expander("What is Youtbe universe of Comments??", expanded=True):
 # st.sidebar.markdown("Clean up the Youtube Section.")
 # st.sidebar.markdown(" ")
 
+
 method = st.radio("Choose which way you want to get the video :", [
-                  "Paste the URL of the video.", "Search the video online."])
+                  "Search the video online.", "Paste the URL of the video."])
 
 if method == "Paste the URL of the video.":
     url = st.text_input(
