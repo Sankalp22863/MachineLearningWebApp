@@ -32,7 +32,7 @@ import altair as alt
 # from plotly import graph_objs as go
 # from matplotlib.animation import FuncAnimation
 
-# from youtubesearchpython import VideosSearch
+from youtubesearchpython import VideosSearch
 
 from streamlit_player import st_player
 
@@ -109,7 +109,8 @@ else:
     vid_name = st.text_input(
         "Choose the name of the video you want to search.")
     url = ""
-seach_vids = YoutubeApI.Search.list(vid_name)
+    # seach_vids = YoutubeApI.Search.list(vid_name)
+    videosSearch = VideosSearch(vid_search, limit=10)
 
 if url != "":
     youtube = YoutubeAPI.YoutubeAPI(url)
