@@ -106,8 +106,10 @@ if method == "Paste the URL of the video.":
     url = st.text_input(
         "Please enter the url of the video you want to check the comments of.")
 else:
+    vid_name = st.text_input(
+        "Choose the name of the video you want to search.")
     url = ""
-
+seach_vids = YoutubeApI.Search.list(vid_name)
 
 if url != "":
     youtube = YoutubeAPI.YoutubeAPI(url)
