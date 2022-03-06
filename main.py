@@ -93,10 +93,10 @@ else:
     url = ""
     videosSearch = VideosSearch(vid_search, limit=10)
 
-    if vid_search != '':
+	Vids = []
+	url = []
 
-		Vids = []
-    	url = []	
+    if vid_search != '':
 
         for i in range(10):
             Vids.append(videosSearch.result()['result'][i]['title'])
