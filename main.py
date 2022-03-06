@@ -94,13 +94,16 @@ else:
 
     # Searching the Video using the URL.
 
+    vids = []
+    urls = []
+
     if vid_search != '':
         for i in range(10):
             Vids.append(videosSearch.result()['result'][i]['title'])
-            url.append(videosSearch.result()['result'][i]['link'])
+            urls.append(videosSearch.result()['result'][i]['link'])
 
         for i in range(10):
-            t[Vids[i]] = url[i]
+            t[Vids[i]] = urls[i]
 
         selected_video = st.selectbox('Select the Video', Vids)
 
