@@ -69,9 +69,6 @@ t = {}
 
 welcome_txt = '''Years for now the comment section of Youtube has been plagued with random spam content and the youtube doesn't seem to doing anything about it. We here introduce a new comment section revamped to make the good comments float to the top and the spam ones to linger to the bottom.'''
 
-
-st.markdown(welcome_txt)
-
 _, _,  col, _, _ = st.columns(5)
 
 col.title('🙏 ')
@@ -84,6 +81,11 @@ _, _,  col, _, _ = st.columns(5)
 
 col.title('to')
 st.title('Youtube Universe of Comments.')
+
+
+with st.expander("Description :"):
+    st.markdown(welcome_txt)
+
 
 # Create a page dropdown
 # page = st.sidebar.selectbox("Choose your page", ["View Video."])
