@@ -63,7 +63,10 @@ class YoutubeAPI:
             self.comment_count = self.statistics["commentCount"]
         except KeyError:
             self.comment_count = 0
-        self.like_count = self.statistics["likeCount"]
+        try:
+            self.like_count = self.statistics["likeCount"]
+        except KeyError:
+            self.comment_count = 0
         # dislike_count = statistics["dislikeCount"]
         self.view_count = self.statistics["viewCount"]
         # get duration from content details
