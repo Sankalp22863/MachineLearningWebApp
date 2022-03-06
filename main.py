@@ -46,6 +46,8 @@ import time
 
 import YoutubeAPI
 
+vid_search = ""
+
 
 def vid():
     global url
