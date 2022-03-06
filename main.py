@@ -216,7 +216,7 @@ if url != "":
         author_name = name["Author Name"]
         comment_body = name["Comment"]
 # 		c1, c2 = columns(2)
-        with st.expander(author_name):
+        with st.expander(author_name + "Says : "):
             st.markdown(comment_body)
 
     # st.dataframe(youtube.df[["Author Name", "Comment"]])
