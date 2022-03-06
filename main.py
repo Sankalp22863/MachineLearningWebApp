@@ -87,6 +87,9 @@ with st.expander("What is Youtbe universe of Comments??", expanded=True):
     st.markdown(welcome_txt)
 
 
+st.camera_input("Cheese.", key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False)
+
+
 # Create a page dropdown
 # page = st.sidebar.selectbox("Choose your page", ["View Video."])
 
