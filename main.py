@@ -57,6 +57,19 @@ def vid():
     return
 
 
+class color:
+       PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
+
 # All the required Variables.
 url = []
 Vids = []
@@ -211,12 +224,13 @@ if url != "":
 
     st.header("The Top 5 Comments of the Video are :")
 
+    st.text(color.BOLD + 'Hello World !' + color.END)
+
     for i in range(5):
         name = youtube.df.iloc[i]
         author_name = name["Author Name"]
         comment_body = name["Comment"]
 # 		c1, c2 = columns(2)
-        st.text("\033[1m This is bold \033[0m")
         with st.expander(author_name + " Says : "):
             st.markdown(comment_body)
 
