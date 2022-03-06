@@ -83,7 +83,7 @@ col.title('to')
 st.title('Youtube Universe of Comments.')
 
 
-with st.expander("Description :"):
+with st.expander("What is Youtbe universe of Comments??", expanded=True):
     st.markdown(welcome_txt)
 
 
