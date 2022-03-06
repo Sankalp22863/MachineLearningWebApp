@@ -92,8 +92,8 @@ col.title('*_Welcome_*')
 
 _, _, _,  col, _, _, _ = st.columns(7)
 
-col.title('to')
-st.title('Youtube Universe of Comments.')
+col.title('*_to_*')
+st.title('*_Youtube Universe of Comments._*')
 
 
 with st.expander("What is Youtbe universe of Comments??", expanded=True):
