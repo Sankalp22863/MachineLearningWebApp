@@ -9,6 +9,8 @@ import subprocess
 class Senti_Analysis:
     def __init__(self):
         subproc = subprocess.Popen(
+            "pip install textblob", shell=True, stdout=subprocess.PIPE)
+        subproc = subprocess.Popen(
             "python -m textblob.download_corpora", shell=True, stdout=subprocess.PIPE)
         subprocess_return = subproc.stdout.read()
         # print(subprocess_return)
