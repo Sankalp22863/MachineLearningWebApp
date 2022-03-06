@@ -145,7 +145,7 @@ else:
         for i in range(10):
             t[Vids[i]] = urls[i]
 
-        selected_video = st.selectbox('Select the Video', Vids, on_change = disp_vid)
+        selected_video = st.selectbox('Select the Video', Vids, on_change = disp_vid(selected_video))
 
         prev = selected_video
 
