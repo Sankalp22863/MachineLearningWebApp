@@ -60,11 +60,9 @@ def vid():
 
     return
 
-def disp_vid(selected_video):
-    url = t[selected_video]
-    st.subheader(selected_video)
-    # Embed a youtube video
-    st_player(url)
+def change_vid_disp():
+    global selected_video
+    st.session_state.selected_video = selected_video
 
 
 
@@ -145,9 +143,10 @@ else:
         for i in range(10):
             t[Vids[i]] = urls[i]
 
-        selected_video = Vids[0]
+        if "selected_video" not in st.session_state:
+            st.session_state.selected_video = Vids[0]
 
-        selected_video = st.selectbox('Select the Video', Vids)
+        selected_video = st.selectbox('Select the Video', Vids, on_change = change_vid_disp)
 
         prev = selected_video
 
