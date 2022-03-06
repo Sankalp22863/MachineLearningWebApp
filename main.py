@@ -88,7 +88,7 @@ col.title('🙏 ')
 
 _, col, _ = st.columns(3)
 
-col.title('Welcome')
+col.title('*_Welcome_*')
 
 _, _, _,  col, _, _, _ = st.columns(7)
 
@@ -229,7 +229,6 @@ if url != "":
         author_name = name["Author Name"]
         comment_body = name["Comment"]
 # 		c1, c2 = columns(2)
-        st.text("This text is **bold**.")
         with st.expander("**" + author_name + "**" + " Says : "):
             st.markdown(comment_body)
 
