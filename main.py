@@ -72,7 +72,11 @@ welcome_txt = '''Years for now the comment section of Youtube has been plagued w
 
 st.markdown(welcome_txt)
 
-st.title('🙏 Welcome to Youtube Universe of Comments.')
+_, col, _ = st.columns(3)
+
+col.title('🙏 ')
+
+st.title('Welcome to Youtube Universe of Comments.')
 
 # Create a page dropdown
 # page = st.sidebar.selectbox("Choose your page", ["View Video."])
