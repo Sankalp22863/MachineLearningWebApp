@@ -258,6 +258,10 @@ if url != "":
         col2.dataframe(df.sort_values(by=['Polarity']).head(10)[
             ["Comment", "Polarity", "Subjectivity"]])
 
+        # Gravity is defined as : G = (Subjectivity)/(2 + Polarity)**2
+
+        df["Gravity"] = df["Subjectivity"]/(2 + df["Polarity"])**2
+
         # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
 
     else:
