@@ -62,7 +62,7 @@ def vid():
 
 def change_vid_disp():
     global selected_video
-    selected_video
+    # selected_video
     st.session_state.selected_video = selected_video
 
 
