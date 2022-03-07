@@ -289,10 +289,10 @@ def main():
 
             col1, col2 = st.columns(2)
 
-            col1.dataframe(df.sort_values(by=['Polarity'], ascending=False).head(10)[
+            col1.dataframe(df.sort_values(by=['Gravity'], ascending=False).head(10)[
                 ["Comment", "Gravity"]])
 
-            col2.dataframe(df.sort_values(by=['Polarity']).head(10)[
+            col2.dataframe(df.sort_values(by=['Gravity']).head(10)[
                 ["Comment", "Gravity"]])
 
             # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
