@@ -285,7 +285,7 @@ def main():
 
             # Gravity is defined as : G = (Subjectivity)/(2 + Polarity)**2
 
-            df["Gravity"] = 1/(df["Subjectivity"] + 0.1)*(2 + df["Polarity"])
+            df["Gravity"] = 1/(df["Subjectivity"] + 0.1)*(2 + df["Polarity"])**2
 
             col1, col2 = st.columns(2)
 
