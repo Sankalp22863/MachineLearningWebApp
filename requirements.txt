@@ -13,3 +13,4 @@ keras==2.6.0
 sklearn
 nltk
 textblob==0.17.1
+wordcloud

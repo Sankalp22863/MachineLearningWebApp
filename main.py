@@ -5,6 +5,12 @@ from datetime import date
 from threading import Thread
 import threading
 import multiprocessing
+import string
+
+# Displaying the Words.
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # Load Packages
 import numpy as np
@@ -17,6 +23,7 @@ import matplotlib.pyplot as plt
 import VideoPlaylist
 
 from textblob import TextBlob
+from sklearn.manifold import TSNE
 
 import Sentimental_Analysis
 
@@ -49,6 +56,64 @@ from PIL import Image
 import time
 
 import YoutubeAPI
+
+from nltk import word_tokenize
+from gensim.models import Word2Vec as w2v
+from sklearn.decomposition import PCA
+
+
+def data_preprocessing(lines, sw = STOPWORDS):
+    # remove new lines
+    # lines = [line.rstrip('\n') for line in lines]
+
+    # remove punctuations from each line
+    lines = [line.translate(str.maketrans('', '', string.punctuation)) for line in lines]
+
+
+    # Removing the StopWords.    
+    res = []
+    for line in lines:
+        original = line
+        line = [w for w in line if w not in sw]
+        if len(line) < 1:
+            line = original
+        res.append(line)
+    return res
+
+def tsne_plot(model):
+    # Crearting the T-SNE Plot.
+    labels = []
+    tokens = []
+
+    for word in model.wv.index_to_key:
+        word
+        tokens.append(model.wv[word])
+        labels.append(word)
+    # tokens = list(model.wv.key_to_index.vals())
+    # tokens
+    
+    tsne_model = TSNE(perplexity=40, n_components=2, init='pca', n_iter=2500, random_state=23)
+    new_values = tsne_model.fit_transform(tokens)
+
+    x = []
+    y = []
+    for value in new_values:
+        x.append(value[0])
+        y.append(value[1])
+        
+    fig = plt.figure(figsize=(8, 8)) 
+    for i in range(len(x)):
+        plt.scatter(x[i],y[i])
+        plt.annotate(labels[i],
+                     xy=(x[i], y[i]),
+                     xytext=(5, 2),
+                     textcoords='offset points',
+                     ha='right',
+                     va='bottom')
+    st.balloons()
+    st.pyplot(fig)
+    # plt.show()
+    return
 
 
 def vid():
@@ -296,6 +361,57 @@ def main():
                 ["Comment", "Gravity"]])
 
             # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
+
+            # Displaying the dataframe words.
+            # st.dataframe(df)
+
+            # Now Displaying the Given Words into a Wordcloud.
+            comment_words = ''
+            stopwords = set(STOPWORDS)
+
+            for vals in df.Comment:
+                # Typecasting the Value to the string.
+                vals = str(vals)
+
+                # splitting the value.
+                tokens = vals.split(' ')
+
+                # Converts each token into lowercase
+                for i in range(len(tokens)):
+                    tokens[i] = tokens[i].lower()
+                
+                comment_words += " ".join(tokens)+" "
+
+            # Now Generating the WordCloud.
+            wordcloud = WordCloud(width = 800, height = 800,
+                background_color ='White',
+                stopwords = stopwords,
+                min_font_size = 10).generate(comment_words)
+
+            wordcloud.to_file('WordCloud.png')
+
+            # Now Visualizing the WordCloud as an image.
+            st.image('WordCloud.png')
+
+            # Now creating the WordEmbedding.
+            filtered_lines = data_preprocessing(lines = comment_words, sw = stopwords)
+
+            w = w2v(
+            filtered_lines,
+            min_count=3,  
+            sg = 1,       
+            window=7)       
+
+
+            emb_df = (
+                pd.DataFrame(
+                    [w.wv.get_vector(str(n)) for n in w.wv.key_to_index],
+                    index = w.wv.key_to_index
+                )
+            )
+            # st.dataframe(emb_df.head())
+
+            tsne_plot(w)
 
         else:
             # Then the comments for the video have been disabled.
