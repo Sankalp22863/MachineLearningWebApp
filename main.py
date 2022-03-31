@@ -27,6 +27,11 @@ from sklearn.manifold import TSNE
 
 import Sentimental_Analysis
 
+# Importing the Necessary lobararies for Google Sheet Integration.
+import pandas as pd
+import gspread
+import df2gspread as d2g
+
 # try:
 #     from streamlit.ReportThread import add_report_ctx
 #     from streamlit.server.Server import Server
@@ -132,7 +137,6 @@ def change_vid_disp(selected_video):
 def rerun():
     rerun = True
     return
-
 
 
 class color:
@@ -417,6 +421,22 @@ def main():
 
             # tsne_plot(w)
 
+            # Dumping the data into the Spreadsheet.
+            # Scopes are the addresses where we want the 
+            scope = ['https://spreadsheets.google.com/feeds',
+                     'https://www.googleapis.com/auth/drive']
+            
+            # Now Bringing in the credentials.
+            credentials = ServiceAccountCredentials.from_json_keyfile_name(
+                        'jsonFileFromGoogle.json', scope)
+
+            gc = gspread.authorize(credentials)
+
+            # Spreadsheet Key.
+            spreadsheet_key = "1fj3CTi1Px5FuhTtLcrWtm8_-jwT0wZNhJNYdTO4wUog"
+            wks_name = 'Master'
+            d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
+            
         else:
             # Then the comments for the video have been disabled.
             st.header(
