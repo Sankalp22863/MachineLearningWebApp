@@ -1,4 +1,5 @@
 # Importing the Required Packages.
+from weakref import KeyedRef
 import numpy as np
 import pandas as pd
 from googleapiclient.discovery import build
@@ -85,6 +86,18 @@ class YoutubeAPI:
             part="snippet",
             **kwargs
         ).execute()
+    
+    def get_comment_channel(self, youtube, comment_id, **kwargs):
+        return youtube.comments().list(
+            part="snippet",
+            id = str(comment_id)
+        ).execute()
+    
+    def get_country(self, youtube, channel_id, **kwargs):
+        return youtube.channels().list(
+            part="snippet",
+            id = str(channel_id)
+        ).execute()
 
     def scrap_comments(self, url):
         if "watch" in url:
@@ -108,6 +121,7 @@ class YoutubeAPI:
         comments = 0
         self.df = []
         page_no = 0
+        check_done = False
         while not done:
             page_no += 1
             # make API call to get all comments from the channel (including posts & videos)
@@ -126,7 +140,15 @@ class YoutubeAPI:
                 like_count = item["snippet"]["topLevelComment"]["snippet"]["likeCount"]
                 author = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
                 comment_id = item["snippet"]["topLevelComment"]["id"]
-                row = [comment_id, author, comment, updated_at, like_count]
+                # getting the channel_id of the Comment.
+                channel_id = self.get_comment_channel(self.youtube, comment_id, **params)
+                channel_id = channel_id.get("items")[0]["snippet"]["authorChannelId"]["value"]
+                country = self.get_country(self.youtube, channel_id)
+                try:
+                    country = country.get("items")[0]["snippet"]["country"]
+                except KeyError:
+                    country = "AQ"
+                row = [comment_id, author, comment, updated_at, like_count, country]
                 self.df.append(row)
             if "nextPageToken" in response:
                 # if there is a next page
@@ -138,6 +160,8 @@ class YoutubeAPI:
                 break
 
         self.df = pd.DataFrame(self.df, columns=[
-                               'Comment_id', 'Author Name', 'Comment', 'Updated_at', 'Like_Count'])
+                               'Comment_id', 'Author Name', 'Comment', 'Updated_at', 'Like_Count', "Country_Location"])
 
         return page_no, comments
+
+

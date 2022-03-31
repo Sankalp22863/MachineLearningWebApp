@@ -86,7 +86,6 @@ def tsne_plot(model):
     tokens = []
 
     for word in model.wv.index_to_key:
-        word
         tokens.append(model.wv[word])
         labels.append(word)
     # tokens = list(model.wv.key_to_index.vals())
@@ -360,6 +359,11 @@ def main():
             col2.dataframe(df.sort_values(by=['Gravity'], ascending=False).head(10)[
                 ["Comment", "Gravity"]])
 
+            # Saving the DataFrame as a CSV file to use later.
+            df.to_csv('Data.csv')
+
+            # st.dataframe(df[["Country_Location"]])
+
             # st.dataframe(df[["Comment", "Polarity", "Subjectivity"]])
 
             # Displaying the dataframe words.
@@ -411,7 +415,7 @@ def main():
             )
             # st.dataframe(emb_df.head())
 
-            tsne_plot(w)
+            # tsne_plot(w)
 
         else:
             # Then the comments for the video have been disabled.
