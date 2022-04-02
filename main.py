@@ -63,7 +63,7 @@ import time
 import YoutubeAPI
 
 from nltk import word_tokenize
-from gensim.models import Word2Vec as w2v
+# from gensim.models import Word2Vec as w2v
 from sklearn.decomposition import PCA
 
 
@@ -402,21 +402,21 @@ def main():
             st.image('WordCloud.png')
 
             # Now creating the WordEmbedding.
-            filtered_lines = data_preprocessing(lines = comment_words, sw = stopwords)
+            # filtered_lines = data_preprocessing(lines = comment_words, sw = stopwords)
 
-            w = w2v(
-            filtered_lines,
-            min_count=3,  
-            sg = 1,       
-            window=7)       
+            # w = w2v(
+            # filtered_lines,
+            # min_count=3,  
+            # sg = 1,       
+            # window=7)       
 
 
-            emb_df = (
-                pd.DataFrame(
-                    [w.wv.get_vector(str(n)) for n in w.wv.key_to_index],
-                    index = w.wv.key_to_index
-                )
-            )
+            # emb_df = (
+            #     pd.DataFrame(
+            #         [w.wv.get_vector(str(n)) for n in w.wv.key_to_index],
+            #         index = w.wv.key_to_index
+            #     )
+            # )
             # st.dataframe(emb_df.head())
 
             # tsne_plot(w)
