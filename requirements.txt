@@ -16,4 +16,4 @@ textblob==0.17.1
 wordcloud
 gspread
 df2gspread
-gensim
+oauth2client==4.1.3
