@@ -16,3 +16,4 @@ textblob==0.17.1
 wordcloud
 gspread
 df2gspread
+gensim
