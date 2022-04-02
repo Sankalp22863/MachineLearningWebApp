@@ -31,7 +31,8 @@ import Sentimental_Analysis
 import pandas as pd
 import gspread
 import df2gspread as d2g
-from oauth2client.service_account import ServiceAccountCredential
+
+from oauth2client.service_account import ServiceAccountCredentials
 
 # try:
 #     from streamlit.ReportThread import add_report_ctx
