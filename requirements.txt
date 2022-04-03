@@ -18,3 +18,4 @@ gspread
 df2gspread
 oauth2client==4.1.3
 pygsheets
+google_auth_httplib2
