@@ -68,6 +68,27 @@ from nltk import word_tokenize
 # from gensim.models import Word2Vec as w2v
 from sklearn.decomposition import PCA
 
+# Dumping the dataframe into the Gsheet.
+import pygsheets
+
+# Importing Streamlit Components.
+import streamlit.components.v1 as components
+
+def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
+    """
+    This function would take in the dataframe which would be 
+    """
+    gc = pygsheets.authorize(service_file=service_file_path)
+    sh = gc.open_by_key(spreadsheet_id)
+    try:
+        sh.add_worksheet(sheet_name)
+    except:
+        pass
+    wks_write = sh.worksheet_by_title(sheet_name)
+    wks_write.clear('A1',None,'*')
+    wks_write.set_dataframe(data_df, (1,1), encoding='utf-8', fit=True)
+    wks_write.frozen_rows = 1
+
 
 def data_preprocessing(lines, sw = STOPWORDS):
     # remove new lines
@@ -158,6 +179,9 @@ class color:
 url = []
 Vids = []
 t = {}
+
+# Beatufying the Project.
+st.set_page_config(page_title="Youtube Universe", page_icon="🖖")
 
 def main():
     global url
@@ -392,6 +416,10 @@ def main():
                 
                 comment_words += " ".join(tokens)+" "
 
+            # Displaying the Comments Location Wise.
+            html_temp = """<div class='tableauPlaceholder' id='viz1648970018874' style='position: relative'><noscript><a href='#'><img alt='Interactivity Quotient (IQ) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book1_16489692955510&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Book1_16489692955510&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book1_16489692955510&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1648970018874');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>"""
+            components.html(html_temp, height = 500)
+
             # Now Generating the WordCloud.
             wordcloud = WordCloud(width = 800, height = 800,
                 background_color ='White',
@@ -399,6 +427,7 @@ def main():
                 min_font_size = 10).generate(comment_words)
 
             wordcloud.to_file('WordCloud.png')
+
 
             # Now Visualizing the WordCloud as an image.
             st.image('WordCloud.png')
@@ -425,19 +454,21 @@ def main():
 
             # Dumping the data into the Spreadsheet.
             # Scopes are the addresses where we want the 
-            scope = ['https://spreadsheets.google.com/feeds',
-                     'https://www.googleapis.com/auth/drive']
+            # scope = ['https://spreadsheets.google.com/feeds',
+            #          'https://www.googleapis.com/auth/drive']
             
-            # Now Bringing in the credentials.
-            credentials = ServiceAccountCredentials.from_json_keyfile_name(
-                        'jsonFileFromGoogle.json', scope)
+            # # Now Bringing in the credentials.
+            # credentials = ServiceAccountCredentials.from_json_keyfile_name(
+            #             'jsonFileFromGoogle.json', scope)
 
-            gc = gspread.authorize(credentials)
+            # gc = gspread.authorize(credentials)
 
-            # Spreadsheet Key.
-            spreadsheet_key = "1fj3CTi1Px5FuhTtLcrWtm8_-jwT0wZNhJNYdTO4wUog"
-            wks_name = 'Master'
-            d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
+            # # Spreadsheet Key.
+            # spreadsheet_key = "1fj3CTi1Px5FuhTtLcrWtm8_-jwT0wZNhJNYdTO4wUog"
+            # wks_name = 'Master'
+            # d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
+
+            write_to_gsheet("jsonFileFromGoogle.json", "1exhQ6oXQ38yLZNZG380VErZnp20vWTI8i4tzEbqw8pE", "Sheet1", df)
             
         else:
             # Then the comments for the video have been disabled.
