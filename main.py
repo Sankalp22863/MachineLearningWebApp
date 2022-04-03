@@ -422,7 +422,6 @@ def main():
 
             # Now Generating the WordCloud.
             wordcloud = WordCloud(width = 800, height = 800,
-                background_color ='White',
                 stopwords = stopwords,
                 min_font_size = 10).generate(comment_words)
 
