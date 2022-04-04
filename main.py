@@ -474,13 +474,13 @@ def main():
             write_to_gsheet("jsonFileFromGoogle.json", "1exhQ6oXQ38yLZNZG380VErZnp20vWTI8i4tzEbqw8pE", "Sheet1", df)
 
             # Seperating out the Hate Comments.
-            HateComments_obj = HateComments.HateComments()
+            # HateComments_obj = HateComments.HateComments()
 
-            preds = HateComments_obj.prediction()
+            # preds = HateComments_obj.prediction()
 
-            df["hate_comment_prediction"] = preds
+            # df["hate_comment_prediction"] = preds
 
-            st.dataframe(df[["Comment", "hate_comment_prediction"]])
+            # st.dataframe(df[["Comment", "hate_comment_prediction"]])
             
         else:
             # Then the comments for the video have been disabled.
