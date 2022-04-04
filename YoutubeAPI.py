@@ -16,7 +16,7 @@ class YoutubeAPI:
     def __init__(self, url):
         # Sankalp's Youtube API key - AIzaSyA9TQNt6htXodGXs_lX9mdWVEdmxHOh1do.
         # Ashay katre's Youtube API Key - AIzaSyAnejPGk6B8G73uINAzni3-ydiHKs59W1o.
-        self.youtubeApiKey = "AIzaSyAnejPGk6B8G73uINAzni3-ydiHKs59W1o"
+        self.youtubeApiKey = "AIzaSyA9TQNt6htXodGXs_lX9mdWVEdmxHOh1do"
         self.youtube = build('youtube', 'v3', developerKey=self.youtubeApiKey)
         # # parse video ID from URL
         # self.video_id = self.get_video_id_by_url(url)

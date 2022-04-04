@@ -7,8 +7,6 @@ import joblib
 import nltk 
 from nltk.sentiment import SentimentIntensityAnalyzer as SIA
 
-
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer as VS
 from textstat.textstat import *
 
 class classifier_abusive:

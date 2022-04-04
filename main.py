@@ -74,6 +74,8 @@ import pygsheets
 # Importing Streamlit Components.
 import streamlit.components.v1 as components
 
+import HateComments
+
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     """
     This function would take in the dataframe which would be 
@@ -88,6 +90,7 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     wks_write.clear('A1',None,'*')
     wks_write.set_dataframe(data_df, (1,1), encoding='utf-8', fit=True)
     wks_write.frozen_rows = 1
+    return
 
 
 def data_preprocessing(lines, sw = STOPWORDS):
@@ -377,9 +380,10 @@ def main():
             col2.dataframe(df.sort_values(by=['Polarity']).head(10)[
                 ["Comment", "Polarity", "Subjectivity"]])
 
-            # Gravity is defined as : G = (Subjectivity)/(2 + Polarity)**2
+            # Gravity is defined as : G = (Subjectivity + 0.09)/(2 + Polarity)**2
+            # Range of Gravity - 0.01 to 1.09
 
-            df["Gravity"] = (df["Subjectivity"] + 0.1)/(2 + df["Polarity"])**2
+            df["Gravity"] = (df["Subjectivity"] + 0.09)/(2 + df["Polarity"])**2
 
             col1, col2 = st.columns(2)
 
@@ -468,6 +472,15 @@ def main():
             # d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
 
             write_to_gsheet("jsonFileFromGoogle.json", "1exhQ6oXQ38yLZNZG380VErZnp20vWTI8i4tzEbqw8pE", "Sheet1", df)
+
+            # Seperating out the Hate Comments.
+            HateComments_obj = HateComments.HateComments()
+
+            preds = HateComments_obj.prediction()
+
+            df["hate_comment_prediction"] = preds
+
+            st.dataframe(df[["Comment", "hate_comment_prediction"]])
             
         else:
             # Then the comments for the video have been disabled.
