@@ -1,4 +1,3 @@
-# pip install streamlit pystan = 2.19.9.1 fbprophet yfinance plotly
 import streamlit as st
 from datetime import date
 
@@ -75,6 +74,10 @@ import pygsheets
 import streamlit.components.v1 as components
 
 import HateComments
+
+# Collecting the data into the excell sheet.
+# from openpyxl import load_workbook
+
 
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     """
@@ -394,7 +397,9 @@ def main():
                 ["Comment", "Gravity"]])
 
             # Saving the DataFrame as a CSV file to use later.
-            df.to_csv('Data.csv')
+            # df.to_csv('Data.csv', mode='a', index=False, header=False)
+            with open("Data.csv", 'a', encoding="utf-8") as f:
+                df.to_csv(f)
 
             # st.dataframe(df[["Country_Location"]])
 
@@ -487,6 +492,22 @@ def main():
             st.header(
                 "The Comments for this Video have been disabed So unable to proceed.")
             st.header("So, please choose a different video.")
+
+        # # Collecting the data into an excell sheet.
+        # writer = pd.ExcelWriter('comments_data.xlsx', engine='xlsxwriter')
+        # writer.save()
+        # df = df
+        # writer = pd.ExcelWriter('comments_data.xlsx', engine='openpyxl')
+        # # try to open an existing workbook
+        # writer.book = load_workbook('comments_data.xlsx')
+        # # copy existing sheets
+        # writer.sheets = dict((ws.title, ws) for ws in writer.book.worksheets)
+        # # read existing file
+        # reader = pd.read_excel(r'comments_data.xlsx')
+        # # write out the new sheet
+        # df.to_excel(writer,index=False,header=False,startrow=len(reader)+1)
+
+        # writer.close()
 
 
     else:

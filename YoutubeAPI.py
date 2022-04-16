@@ -17,7 +17,7 @@ class YoutubeAPI:
         # Sankalp's Youtube API key - AIzaSyA9TQNt6htXodGXs_lX9mdWVEdmxHOh1do.
         # Ashay katre's Youtube API Key - AIzaSyAnejPGk6B8G73uINAzni3-ydiHKs59W1o.
         # Pushpesh Raj's Youtube API key - AIzaSyBG2k9KIoLA_Ouz6jZN7734p045b9k0UeE.
-        self.youtubeApiKey = "AIzaSyBG2k9KIoLA_Ouz6jZN7734p045b9k0UeE"
+        self.youtubeApiKey = "AIzaSyDDGnHg7bNMc_p9WeZXfKy-WSZZXSxaWDs"
         self.youtube = build('youtube', 'v3', developerKey=self.youtubeApiKey)
         # # parse video ID from URL
         # self.video_id = self.get_video_id_by_url(url)
