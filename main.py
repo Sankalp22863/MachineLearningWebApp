@@ -1,3 +1,4 @@
+from h11 import Data
 import streamlit as st
 from datetime import date
 
@@ -77,6 +78,9 @@ import HateComments
 
 # Collecting the data into the excell sheet.
 # from openpyxl import load_workbook
+
+# Importing the Data Cleaning Module.
+import DataCleaning
 
 
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
@@ -439,6 +443,12 @@ def main():
 
             # Now Visualizing the WordCloud as an image.
             st.image('WordCloud.png')
+
+            # dc = DataCleaning.DataCleaning()
+
+            # preds = dc.data_cleaning(df)
+
+
 
             # Now creating the WordEmbedding.
             # filtered_lines = data_preprocessing(lines = comment_words, sw = stopwords)

@@ -29,6 +29,8 @@ from xgboost import XGBClassifier
 from deep_translator import GoogleTranslator
 import emoji
 
+import pickle
+
 
 
 class DataCleaning:
@@ -50,7 +52,7 @@ class DataCleaning:
         
         # This functions calculates the profanity vector for a given tweet.
         
-        bad_words = pd.read_csv('/Data/Hinglish_Profanity_List.csv', engine='python', sep=",", encoding='cp1252', header=None)
+        bad_words = pd.read_csv('Hinglish_Profanity_List.csv', engine='python', sep=",", encoding='cp1252', header=None)
         bad_words.columns = ['Hinglish', 'English', 'Level']
         hinglish = bad_words['Hinglish'].values
         level = bad_words['Level'].values
@@ -131,7 +133,7 @@ class DataCleaning:
         clean_translated_data = []
         prof_vector = []
         
-        for tweet in tqdm(self, data):
+        for tweet in tqdm(data):
             userids = self.userid(tweet)
             clean_text = []
             tweet = re.sub(r'\\n', ' ', tweet)  # replacing '\\n' with a space
@@ -170,55 +172,55 @@ class DataCleaning:
             
         return clean_data_hinglish, user_ids, prof_vector, clean_translated_data
     
-    def feature_process(self, clean_data_train, clean_data_test, user_ids_train, user_ids_test, PV_train, PV_test):
+    def feature_process(self, clean_data, user_ids_train, PV_train):
         ''' This function except the clean data and return Train and Test dataset after stacking userids, profanity vector, negative sentiment, neutral sentiment, 
                         positive sentiment, compound sentiment, n-grams and tfidf features'''
         
         vectorizer = CountVectorizer()
         tfidf = TfidfVectorizer()
-        negative_train, negative_test = [], []
-        neutral_train, neutral_test = [], []
-        positive_train, positive_test  = [], []
-        compound_train, compound_test  = [], []
+        negative = []
+        neutral = []
+        positive = []
+        compound = []
 
-        for comment in clean_data_train:
+        for comment in clean_data:
             neg, neu, pos, comp = self.SID(comment)
-            negative_train.append(neg), neutral_train.append(neu), positive_train.append(pos), compound_train.append(comp)
+            negative.append(neg), neutral.append(neu), positive.append(pos), compound.append(comp)
         
-        for comment in clean_data_test:
-            neg, neu, pos, comp = SID(comment)
-            negative_test.append(neg), neutral_test.append(neu), positive_test.append(pos), compound_test.append(comp)
+        clean_data_SW = self.stopword(clean_data)
         
-        clean_data_SW_train = self.stopword(clean_data_train)
-        clean_data_SW_test = self.stopword(clean_data_test)
+        clean_data_lemm = self.Lemmatizer(clean_data_SW)
         
-        clean_data_lemm_train = self.Lemmatizer(clean_data_SW_train)
-        clean_data_lemm_test = self.Lemmatizer(clean_data_SW_test)
+        vectorizer.fit(clean_data_lemm)
+        tfidf.fit(clean_data_lemm)
         
-        vectorizer.fit(clean_data_lemm_train)
-        tfidf.fit(clean_data_lemm_train)
-        
-        n_grams_train = vectorizer.transform(clean_data_lemm_train)
-        tfidf_ngrams_train = tfidf.transform(clean_data_lemm_train)
-        
-        n_grams_test = vectorizer.transform(clean_data_lemm_test)
-        tfidf_ngrams_test = tfidf.transform(clean_data_lemm_test)
-        
-        negative_train, negative_test = np.asarray(negative_train), np.asarray(negative_test)
-        neutral_train, neutral_test = np.asarray(neutral_train), np.asarray(neutral_test)
-        positive_train, positive_test  = np.asarray(positive_train), np.asarray(positive_test)
-        compound_train, compound_test = np.asarray(compound_train), np.asarray(compound_test)
-        
-        train_dataset = hstack((user_ids_train, PV_train, negative_train, neutral_train, positive_train, compound_train, n_grams_train, tfidf_ngrams_train))
-        
-        test_dataset = hstack((user_ids_test, PV_test, negative_test, neutral_test, positive_test, compound_test, n_grams_test, tfidf_ngrams_test))
+        n_grams = vectorizer.transform(clean_data_lemm)
+        tfidf_ngrams = tfidf.transform(clean_data_lemm)
         
         
-        return train_dataset, test_dataset
+        negative = np.asarray(negative)
+        neutral = np.asarray(neutral)
+        positive  = np.asarray(positive)
+        compound = np.asarray(compound)
+        
+        dataset = hstack((user_ids_train, PV_train, negative, neutral, positive, compound, n_grams, tfidf_ngrams))
+        
+        return dataset
 
     def replace_emoji_with_text(text):
         text = emoji.demojize(text, delimiters=("", "")) 
         return text
 
-    def data_cleaning(self):
+    def data_cleaning(self, project_data):
+        X = project_data['Comment']
 
+        clean_data_hinglish, user_ids, prof_vector, clean_translated_data = self.cleaning(X)
+
+        Cleaned_Data = self.feature_process(clean_translated_data, user_ids, prof_vector)
+
+        with open('Model_Pickle_Jar/Dicision_Tree_Pickle.pkl', 'rb') as model:
+            decision_tree = pickle.load(model)
+
+        preds = decision_tree.predict(Cleaned_Data)
+
+        return preds
