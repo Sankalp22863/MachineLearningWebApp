@@ -144,14 +144,14 @@ class YoutubeAPI:
                 author = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
                 comment_id = item["snippet"]["topLevelComment"]["id"]
                 # getting the channel_id of the Comment.
-                channel_id = self.get_comment_channel(self.youtube, comment_id, **params)
-                channel_id = channel_id.get("items")[0]["snippet"]["authorChannelId"]["value"]
-                country = self.get_country(self.youtube, channel_id)
-                try:
-                    country = country.get("items")[0]["snippet"]["country"]
-                except KeyError:
-                    country = "AQ"
-                row = [comment_id, author, comment, updated_at, like_count, country]
+                # channel_id = self.get_comment_channel(self.youtube, comment_id, **params)
+                # channel_id = channel_id.get("items")[0]["snippet"]["authorChannelId"]["value"]
+                # country = self.get_country(self.youtube, channel_id)
+                # try:
+                #     country = country.get("items")[0]["snippet"]["country"]
+                # except KeyError:
+                #     country = "AQ"
+                row = [comment_id, author, comment, updated_at, like_count]
                 self.df.append(row)
             if "nextPageToken" in response:
                 # if there is a next page
@@ -163,7 +163,7 @@ class YoutubeAPI:
                 break
 
         self.df = pd.DataFrame(self.df, columns=[
-                               'Comment_id', 'Author Name', 'Comment', 'Updated_at', 'Like_Count', "Country_Location"])
+                               'Comment_id', 'Author Name', 'Comment', 'Updated_at', 'Like_Count'])
 
         return page_no, comments
 
