@@ -65,4 +65,3 @@ For the project, I give credit to
 * Dr. Andrew Ng for his insightful course on Coursera
 
 The code can be freely used by any individual or organization for their needs. 
-MIT LICENSED.
