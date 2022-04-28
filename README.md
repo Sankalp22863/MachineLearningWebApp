@@ -12,6 +12,7 @@
    + [File Descriptions](#file-descriptions)
    + [Models Used](#models-used)
    + [Instructions To Run](#instructions-to-run)
+   + [Results](#results)
    + [Acknowledgement, Author and Licensing](#acknowledgement--author-and-licensing)
 
 ### Installation
@@ -22,7 +23,7 @@ The code should run with no issues using Python versions 3.* Using Jupyter noteb
 
 
 ### Project Motivation
-
+Years for now the comment section of Youtube has been plagued with random spam content and the youtube doesn't seem to doing anything about it. We here introduce a new comment section revamped to make the good comments float to the top and the spam ones to linger to the bottom.
 
 
 ### File Descriptions
@@ -58,6 +59,8 @@ Now to run the code on streamlit
 streamlit run main.py
 ```
 
+### Results
+The interactive web app is hosted on Streamlit and can be found [here](https://share.streamlit.io/sankalp22863/mlmodelsgui/main/MLModelsGUI/main.py)
 
 ### Acknowledgement, Author and Licensing
 For the project, I give credit to 
