@@ -1,4 +1,4 @@
-# Youtube Universe of Comments.
+# Youtube Universe of Comments
 
 ## A project to clean up the youtube comment section using the AI/ML algorithms.
 
