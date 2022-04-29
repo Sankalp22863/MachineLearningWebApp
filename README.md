@@ -60,7 +60,9 @@ streamlit run main.py
 ```
 
 ### Results
-The interactive web app is hosted on Streamlit and can be found [here](https://share.streamlit.io/sankalp22863/mlmodelsgui/main/MLModelsGUI/main.py)
+The interactive web app is hosted on Streamlit and can be found :- 
+[Machine Learning Web App Link](https://share.streamlit.io/sankalp22863/machinelearningwebapp/main.py)
+[ML Model GUI](https://share.streamlit.io/sankalp22863/mlmodelsgui/main/MLModelsGUI/main.py)
 
 ### Acknowledgement, Author and Licensing
 For the project, I give credit to 
